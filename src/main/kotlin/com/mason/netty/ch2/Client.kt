@@ -12,7 +12,7 @@ object Client {
 
   private const val HOST = "localhost"
   private const val PORT = 8765
-  private const val SLEEP_TIME = 20000L
+  private const val SLEEP_TIME = 10000L
 
   @JvmStatic
   fun main(args: Array<String>) {

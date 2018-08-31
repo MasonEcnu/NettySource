@@ -8,3 +8,7 @@ package com.mason.netty.ch2
 class ClientDemo {
 
 }
+
+fun main(args: Array<String>) {
+  println("Hello World!")
+}

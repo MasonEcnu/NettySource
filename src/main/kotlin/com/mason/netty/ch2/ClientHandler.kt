@@ -22,9 +22,11 @@ class ClientHandler(client: Socket) {
     while (true) {
       val data = ByteArray(size = MAX_DATA_LENGTH)
       var len = 0
+      // 接收客户端信息
       while (input.read(data).also { len = it } != -1) {
         val message = String(data, 0, len)
         println("客户端传来消息：$message")
+        // 原封不动的返回收到的信息
         socket.getOutputStream().write(data)
       }
     }

@@ -16,6 +16,7 @@ object Server {
 
   init {
     try {
+      // 创建服务端socket，并监听端口PORT
       this.serverSocket = ServerSocket(PORT)
       println("服务器启动成功，端口：$PORT")
     } catch (ex: IOException) {
@@ -35,6 +36,7 @@ object Server {
   private fun doStart() {
     while (true) {
       try {
+        // 接收客户端连接
         val client = serverSocket.accept()
         ClientHandler(client).start()
       } catch (ex: IOException) {

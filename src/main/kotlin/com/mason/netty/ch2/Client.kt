@@ -2,6 +2,7 @@ package com.mason.netty.ch2
 
 import java.io.IOException
 import java.net.Socket
+import java.net.UnknownHostException
 
 /**
  * Created by mwu on 2018/8/30
@@ -16,7 +17,15 @@ object Client {
 
   @JvmStatic
   fun main(args: Array<String>) {
-    val socket = Socket(HOST, PORT)
+    // 初始化客户端socket，并尝试连接远程host
+    var socket: Socket? = null
+    try {
+      socket = Socket(HOST, PORT)
+    } catch (ux: UnknownHostException) {
+      println("未知Host异常：${ux.message}")
+    } catch (iox: IOException) {
+      println("IO异常：${iox.message}")
+    }
 
     Thread {
       println("客户端启动成功")
@@ -24,10 +33,16 @@ object Client {
         try {
           val message = "Hello World!"
           println("客户端发送数据：$message")
-          socket.getOutputStream().write(message.toByteArray())
+          // 向服务端写数据
+          if (socket != null) {
+            socket.getOutputStream().write(message.toByteArray())
+          } else {
+            throw IOException("客服端socket为空")
+          }
         } catch (ex: IOException) {
           println("写数据出错：${ex.message}")
         }
+        // 客户端线程休眠
         sleep()
       }
     }.start()

@@ -14,6 +14,7 @@ repositories {
 
 dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+  compile group: 'io.netty', name: 'netty-all', version: '4.1.6.Final'
   testCompile('junit:junit:4.12')
 }
 
